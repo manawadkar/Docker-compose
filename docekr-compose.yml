@@ -1,0 +1,36 @@
+version : Yoga_App/v1:01
+services :
+	app:
+	
+	  image: artifactory.com://projectTest/docker/docker-compose:Yoga_App/v1:01
+	  
+	  environment: 
+		- DATABASE_HOST: mysql-db
+		- DATABASE_USERNAME: $username
+		- DATABASE_PASSWORD: $password
+		
+	  networks:
+	    - mynetwork
+	
+	db :
+		image: artifactory.com://projectTest/docker/docker-compose:Mysql
+		
+		environment:
+		  - MYSQL_DB : MYSQL 
+		  - MYSQL_USERNAME: root
+		  - MYSQL_PASSWORD: root
+		
+		networks:
+			- mynetwork
+		
+		volumes :
+		  db-data : /user/data/db-yogaapp
+    
+	
+	network :
+		driver : bridge 
+	
+	volume :
+		driver : local 
+			
+	  
